@@ -1,11 +1,12 @@
 {
-  "name": "y",
+  "name": "cli_file_manager",
   "version": "1.0.0",
   "description": "CLI File Manager",
   "main": "node-js-file-manager.js",
   "scripts": {
+    "start": "node node-js-file-manager.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "gogicha007",
   "license": "ISC"
 }
