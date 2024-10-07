@@ -2,10 +2,10 @@
   "name": "node_file_manager",
   "version": "1.0.0",
   "description": "Node JS CLI File Manager",
-  "main": "node-js-file-manager.js",
+  "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node node-js-file-manager.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "gogicha007",
