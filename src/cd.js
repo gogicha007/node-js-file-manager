@@ -1,5 +1,5 @@
 import path from 'path';
-import fs from 'fs/promises';
+import { access } from 'node:fs/promises';
 
 export const cd = async (toPath, currFolder) => {
   let folder = toPath;
@@ -7,7 +7,7 @@ export const cd = async (toPath, currFolder) => {
     folder = path.join(currFolder, toPath);
   }
   try {
-    await fs.access(folder);
+    await access(folder);
     process.chdir(folder);
     return folder;
   } catch {

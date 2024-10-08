@@ -1,5 +1,6 @@
-import { cd } from './cd.js';
 import { systemInfo } from './system.js';
+import { cd } from './cd.js';
+import { ls } from './ls.js';
 import { goUp } from './up.js';
 import readline from 'readline';
 
@@ -40,6 +41,7 @@ const fileMan = async () => {
         console.log(`You are currently in ${currentFolder}`);
         break;
       case 'ls':
+        await ls(currentFolder)
         console.log('ls');
         console.log(`You are currently in ${currentFolder}`);
         break;
