@@ -1,3 +1,4 @@
+import { cd } from './cd.js';
 import { systemInfo } from './system.js';
 import { goUp } from './up.js';
 import readline from 'readline';
@@ -35,7 +36,7 @@ const fileMan = async () => {
         console.log(`You are currently in ${currentFolder}`);
         break;
       case 'cd':
-        console.log('cd');
+        currentFolder = await cd(args[0], currentFolder)
         console.log(`You are currently in ${currentFolder}`);
         break;
       case 'ls':
