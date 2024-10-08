@@ -1,4 +1,5 @@
 import { systemInfo } from './system.js';
+import { goUp } from './up.js';
 import readline from 'readline';
 
 const args = process.argv.slice(2);
@@ -30,6 +31,16 @@ const fileMan = async () => {
         systemInfo(args);
         break;
       case 'up':
+        currentFolder = goUp(currentFolder);
+        console.log(`You are currently in ${currentFolder}`);
+        break;
+      case 'cd':
+        console.log('cd');
+        console.log(`You are currently in ${currentFolder}`);
+        break;
+      case 'ls':
+        console.log('ls');
+        console.log(`You are currently in ${currentFolder}`);
         break;
       case '.exit':
         rl.close();
