@@ -49,7 +49,7 @@ const fileMan = async () => {
         await cat(args[0], currentFolder);
         break;
       case 'add':
-        await add();
+        await add(args[0], currentFolder);
         break;
       case 'rn':
         await rn();

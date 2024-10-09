@@ -1,7 +1,7 @@
-import path, { resolve } from 'node:path';
-import { access, constants } from 'node:fs/promises';
-import fs from 'node:fs';
+import { access, constants, open } from 'node:fs/promises';
 import { stdout } from 'node:process';
+import path from 'node:path';
+import fs from 'node:fs';
 
 export const cat = async (prop, currentFolder) => {
   try {
@@ -19,8 +19,13 @@ export const cat = async (prop, currentFolder) => {
     console.log(`\nYou are currently in ${currentFolder}`);
   }
 };
-export const add = async (prop) => {
-  console.log('add');
+export const add = async (prop, currentFolder) => {
+    try {
+        const filePath = buildPath(prop, currentFolder);
+        await open(filePath, 'wx')
+    } catch(err){
+        console.error(err.message)
+    }
 };
 export const rn = async (prop) => {
   console.log('rn');
