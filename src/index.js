@@ -54,7 +54,7 @@ const fileMan = async () => {
         await rn(args, currentFolder);
         break;
       case 'cp':
-        await cp();
+        await cp(args, currentFolder);
         break;
       case 'mv':
         await mv(mv);
