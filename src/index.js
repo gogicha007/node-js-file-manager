@@ -2,6 +2,7 @@ import { systemInfo } from './system.js';
 import { cd } from './cd.js';
 import { ls } from './ls.js';
 import { goUp } from './up.js';
+import { cat, add, rn, cp, mv, rm } from './basics.js';
 import readline from 'readline';
 
 const args = process.argv.slice(2);
@@ -34,15 +35,33 @@ const fileMan = async () => {
         break;
       case 'up':
         currentFolder = goUp(currentFolder);
-        console.log(`You are currently in ${currentFolder}`);
+        console.log(`\nYou are currently in ${currentFolder}`);
         break;
       case 'cd':
-        currentFolder = await cd(args[0], currentFolder)
-        console.log(`You are currently in ${currentFolder}`);
+        currentFolder = await cd(args[0], currentFolder);
+        console.log(`\nYou are currently in ${currentFolder}`);
         break;
       case 'ls':
-        await ls(currentFolder)
-        console.log(`You are currently in ${currentFolder}`);
+        await ls(currentFolder);
+        console.log(`\nYou are currently in ${currentFolder}`);
+        break;
+      case 'cat':
+        await cat(args[0], currentFolder);
+        break;
+      case 'add':
+        await add();
+        break;
+      case 'rn':
+        await rn();
+        break;
+      case 'cp':
+        await cp();
+        break;
+      case 'mv':
+        await mv(mv);
+        break;
+      case 'rm':
+        await rm(rm);
         break;
       case '.exit':
         rl.close();
