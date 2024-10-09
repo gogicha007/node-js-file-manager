@@ -1,4 +1,11 @@
-import { access, constants, open, rename, unlink } from 'node:fs/promises';
+import {
+  access,
+  constants,
+  open,
+  rename,
+  unlink,
+  stat,
+} from 'node:fs/promises';
 import { pipeline } from 'node:stream';
 import { stdout } from 'node:process';
 import path from 'node:path';
@@ -89,9 +96,19 @@ export const mv = async (props, currentFolder) => {
     console.log(`\nYou are currently in ${currentFolder}`);
   }
 };
-
-export const removeFile = async (prop) => {
-  console.log('rm');
+export const removeFile = async (prop, currentFolder) => {
+  try {
+    const filePath = buildPath(prop, currentFolder);
+    await access(filePath, constants.R_OK);
+    const fileStat = await stat(filePath);
+    if (!fileStat.isFile()) throw new Error('Please enter valid file name...');
+    await unlink(filePath);
+    console.log('file removed...');
+  } catch (err) {
+    console.error(err.message);
+  } finally {
+    console.log(`\nYou are currently in ${currentFolder}`);
+  }
 };
 
 const buildPath = (argPath, currentFolder) => {
