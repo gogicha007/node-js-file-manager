@@ -42,7 +42,6 @@ const fileMan = async () => {
         break;
       case 'ls':
         await ls(currentFolder)
-        console.log('ls');
         console.log(`You are currently in ${currentFolder}`);
         break;
       case '.exit':

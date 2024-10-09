@@ -1,4 +1,3 @@
-import path from 'path';
 import { readdir } from 'node:fs/promises';
 
 export const ls = async (currentFolder) => {
