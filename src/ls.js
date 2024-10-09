@@ -12,16 +12,14 @@ export const ls = async (currentFolder) => {
       .filter((file) => file.isFile())
       .sort((a, b) => a.name.localeCompare(b.name));
 
-    const list = justFolders.concat(justFiles).reduce((acc, val, idx) => {
+    const list = justFolders.concat(justFiles).reduce((acc, val) => {
       acc.push({
-        index: idx,
         name: val.name,
         type: val.isFile() ? 'file' : 'directory',
       });
       return acc;
     }, []);
-    console.log(Object.keys(list[0]))
-    console.log(list);
+    console.table(list);
   } catch (err) {
     console.error(err);
   }
