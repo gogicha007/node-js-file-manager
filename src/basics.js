@@ -1,4 +1,4 @@
-import { access, constants, open, rename } from 'node:fs/promises';
+import { access, constants, open, rename, unlink } from 'node:fs/promises';
 import { pipeline } from 'node:stream';
 import { stdout } from 'node:process';
 import path from 'node:path';
@@ -21,11 +21,14 @@ export const cat = async (prop, currentFolder) => {
   }
 };
 export const add = async (prop, currentFolder) => {
+  let file;
   try {
     const filePath = buildPath(prop, currentFolder);
-    await open(filePath, 'wx');
+    file = await open(filePath, 'wx');
   } catch (err) {
     console.error(err.message);
+  } finally {
+    if (file) file.close();
   }
 };
 export const rn = async (props, currentFolder) => {
@@ -63,10 +66,31 @@ export const cp = async (props, currentFolder) => {
     console.log(`\nYou are currently in ${currentFolder}`);
   }
 };
-export const mv = async (prop) => {
-  console.log('mv');
+export const mv = async (props, currentFolder) => {
+  try {
+    if (props.length !== 2)
+      throw new Error('Need two arguments: path_to_file path_to_new_directory');
+    await access(props[0]);
+    await access(props[1]);
+    const destination = path.join(props[1], path.basename(props[0]));
+
+    const rs = fs.createReadStream(props[0]);
+    const ws = fs.createWriteStream(destination);
+    await pipeline(rs, ws, (err) => {
+      if (err) console.log('pipeline', err.message);
+    });
+    console.log('File moved...');
+    ws.on('close', async () => {
+      await unlink(props[0]);
+    });
+  } catch (err) {
+    console.error(err.message);
+  } finally {
+    console.log(`\nYou are currently in ${currentFolder}`);
+  }
 };
-export const rm = async (prop) => {
+
+export const removeFile = async (prop) => {
   console.log('rm');
 };
 
