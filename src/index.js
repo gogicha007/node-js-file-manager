@@ -17,7 +17,7 @@ const fileMan = async () => {
       );
     }
   });
-  console.log(`You are currently in ${currentFolder}`);
+  console.log(`\nYou are currently in ${currentFolder}`);
 
   const rl = readline.createInterface({
     input: process.stdin,
@@ -43,7 +43,6 @@ const fileMan = async () => {
         break;
       case 'ls':
         await ls(currentFolder);
-        console.log(`\nYou are currently in ${currentFolder}`);
         break;
       case 'cat':
         await cat(args[0], currentFolder);
@@ -52,7 +51,7 @@ const fileMan = async () => {
         await add(args[0], currentFolder);
         break;
       case 'rn':
-        await rn();
+        await rn(args, currentFolder);
         break;
       case 'cp':
         await cp();
