@@ -10,6 +10,7 @@ import { pipeline } from 'node:stream';
 import { stdout } from 'node:process';
 import path from 'node:path';
 import fs from 'node:fs';
+import { buildPath } from './helper.js';
 
 export const cat = async (prop, currentFolder) => {
   try {
@@ -111,10 +112,10 @@ export const removeFile = async (prop, currentFolder) => {
   }
 };
 
-export const buildPath = (argPath, currentFolder) => {
-  let folder = argPath;
-  if (!path.isAbsolute(argPath)) {
-    folder = path.join(currentFolder, argPath);
-  }
-  return folder;
-};
+// export const buildPath = (argPath, currentFolder) => {
+//   let folder = argPath;
+//   if (!path.isAbsolute(argPath)) {
+//     folder = path.join(currentFolder, argPath);
+//   }
+//   return folder;
+// };

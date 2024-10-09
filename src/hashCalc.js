@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import crypto from 'crypto';
 import { access } from 'node:fs/promises';
 import { finished } from 'node:stream/promises';
-import { buildPath } from './basics.js';
+import { buildPath } from './helper.js';
 
 export const hashCalc = async (prop, currentFolder) => {
   let input;
