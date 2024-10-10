@@ -69,10 +69,10 @@ const fileMan = async () => {
         await hashCalc(args[0], currentFolder);
         break;
       case 'compress':
-        await compress(args[0], currentFolder)
+        await compress(args, currentFolder)
         break;
       case 'decompress':
-        await deCompress(args[0], currentFolder)
+        await deCompress(args, currentFolder)
         break;
       case '.exit':
         rl.close();

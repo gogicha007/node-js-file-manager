@@ -15,7 +15,7 @@ import { buildPath } from './helper.js';
 export const cat = async (prop, currentFolder) => {
   try {
     const filePath = buildPath(prop, currentFolder);
-    await access(filePath, constants.R_OK);
+    await access(filePath);
     const rs = fs.createReadStream(filePath);
     rs.on('data', (chunk) => {
       stdout.write(chunk);
