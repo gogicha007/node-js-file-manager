@@ -16,11 +16,9 @@ export const compress = async (props, currentFolder) => {
       const destStats = await stat(destPath);
       if (!destStats.isDirectory())
         throw new Error('Please enter valid folder name...');
-      destFile = path.join(destPath, `${path.basename(srcFile)}.gz`);
-      // console.log('with second argument', destFile);
+      destFile = path.join(destPath, `${path.basename(srcFile)}.br`);
     } else {
-      destFile = path.join(currentFolder, `${path.basename(srcFile)}.gz`);
-      // console.log('no second argument', destFile);
+      destFile = path.join(currentFolder, `${path.basename(srcFile)}.br`);
     }
     await pipeline(
       fs.createReadStream(srcFile),
@@ -34,9 +32,36 @@ export const compress = async (props, currentFolder) => {
   }
 };
 
-export const deCompress = async () => {
+export const deCompress = async (props, currentFolder) => {
   try {
-    console.log('decompress');
+    const srcFile = buildPath(props[0], currentFolder);
+    const srcStats = await stat(srcFile);
+    const regex = /.br$/i;
+    if (!srcStats.isFile() || !regex.test(srcFile))
+      throw new Error('Please enter valid archive name...');
+    let destFile;
+    if (props[1]) {
+      const destPath = buildPath(props[1], currentFolder);
+      const destStats = await stat(destPath);
+      if (!destStats.isDirectory())
+        throw new Error('Please enter valid folder name...');
+      destFile = path.join(
+        destPath,
+        `${path.basename(srcFile).replace('.br', '')}`
+      );
+      // console.log('with second argument', destFile);
+    } else {
+      destFile = path.join(
+        currentFolder,
+        `${path.basename(srcFile).replace('.br', '')}`
+      );
+      // console.log('no second argument', destFile);
+    }
+    await pipeline(
+      fs.createReadStream(srcFile),
+      zlib.createBrotliDecompress(),
+      fs.createWriteStream(destFile)
+    );
   } catch (err) {
     console.error(err.message);
   } finally {
