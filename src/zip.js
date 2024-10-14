@@ -49,13 +49,11 @@ export const deCompress = async (props, currentFolder) => {
         destPath,
         `${path.basename(srcFile).replace('.br', '')}`
       );
-      // console.log('with second argument', destFile);
     } else {
       destFile = path.join(
         currentFolder,
         `${path.basename(srcFile).replace('.br', '')}`
       );
-      // console.log('no second argument', destFile);
     }
     await pipeline(
       fs.createReadStream(srcFile),
