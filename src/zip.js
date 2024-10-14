@@ -61,7 +61,7 @@ export const deCompress = async (props, currentFolder) => {
       fs.createWriteStream(destFile)
     );
   } catch (err) {
-    console.error('Operation fail', err.message);
+    console.error('Operation fail ,', err.message);
   } finally {
     console.log(`\nYou are currently in ${currentFolder}`);
   }

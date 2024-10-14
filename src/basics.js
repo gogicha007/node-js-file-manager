@@ -106,7 +106,7 @@ export const removeFile = async (prop, currentFolder) => {
     await unlink(filePath);
     console.log('file removed...');
   } catch (err) {
-    console.error('Operation fail', err.message);
+    console.error('Operation fail, ', err.message);
   } finally {
     console.log(`\nYou are currently in ${currentFolder}`);
   }
