@@ -24,7 +24,7 @@ export const cat = async (prop, currentFolder) => {
       console.log(`\nYou are currently in ${currentFolder}`);
     });
   } catch (err) {
-    console.error(err.message);
+    console.error('Operation fail', err.message);
     console.log(`\nYou are currently in ${currentFolder}`);
   }
 };
@@ -34,7 +34,7 @@ export const add = async (prop, currentFolder) => {
     const filePath = buildPath(prop, currentFolder);
     file = await open(filePath, 'wx');
   } catch (err) {
-    console.error(err.message);
+    console.error('Operation fail', err.message);
   } finally {
     if (file) file.close();
   }
@@ -47,7 +47,7 @@ export const rn = async (props, currentFolder) => {
     await access(props[0]);
     rename(props[0], newFile);
   } catch (err) {
-    console.log(err.message);
+    console.log('Operation fail', err.message);
   } finally {
     console.log(`\nYou are currently in ${currentFolder}`);
   }
@@ -69,7 +69,7 @@ export const cp = async (props, currentFolder) => {
     );
     console.log('File copied...');
   } catch (err) {
-    console.error(err.message);
+    console.error('Operation fail', err.message);
   } finally {
     console.log(`\nYou are currently in ${currentFolder}`);
   }
@@ -92,7 +92,7 @@ export const mv = async (props, currentFolder) => {
       await unlink(props[0]);
     });
   } catch (err) {
-    console.error(err.message);
+    console.error('Operation fail', err.message);
   } finally {
     console.log(`\nYou are currently in ${currentFolder}`);
   }
@@ -106,16 +106,8 @@ export const removeFile = async (prop, currentFolder) => {
     await unlink(filePath);
     console.log('file removed...');
   } catch (err) {
-    console.error(err.message);
+    console.error('Operation fail', err.message);
   } finally {
     console.log(`\nYou are currently in ${currentFolder}`);
   }
 };
-
-// export const buildPath = (argPath, currentFolder) => {
-//   let folder = argPath;
-//   if (!path.isAbsolute(argPath)) {
-//     folder = path.join(currentFolder, argPath);
-//   }
-//   return folder;
-// };

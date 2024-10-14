@@ -28,7 +28,7 @@ export function systemInfo(prop, currentFolder) {
       break;
     default:
       console.log(
-        'Please enter valid command (e.g. --EOL, --cpus, --homedir, --username, --architecture)'
+        'Operation fail, Please enter valid command (e.g. --EOL, --cpus, --homedir, --username, --architecture)'
       );
   }
 }

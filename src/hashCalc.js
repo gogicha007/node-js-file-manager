@@ -21,7 +21,7 @@ export const hashCalc = async (prop, currentFolder) => {
       }
     });
   } catch (err) {
-    console.error(err.message);
+    console.error('Operation fail', err.message);
   } finally {
     await finished(input);
     console.log(`\nYou are currently in ${currentFolder}`);
