@@ -11,7 +11,7 @@ export const cd = async (toPath, currFolder) => {
     process.chdir(folder);
     return folder;
   } catch {
-    console.error('Please enter valid directory...');
+    console.error('Operation fail, Please enter valid directory...');
     return currFolder;
   }
 };

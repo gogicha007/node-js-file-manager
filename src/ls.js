@@ -20,7 +20,7 @@ export const ls = async (currentFolder) => {
     }, []);
     console.table(list);
   } catch (err) {
-    console.error(err);
+    console.error('Operation fail ', err);
   } finally {
     console.log(`\nYou are currently in ${currentFolder}`);
   }

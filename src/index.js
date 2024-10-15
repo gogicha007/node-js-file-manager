@@ -2,7 +2,10 @@ import { systemInfo } from './system.js';
 import { cd } from './cd.js';
 import { ls } from './ls.js';
 import { goUp } from './up.js';
-import { cat, add, rn, cp, mv, rm } from './basics.js';
+import { cat, add, rn, cp, mv, removeFile } from './basics.js';
+import { hashCalc } from './hashCalc.js';
+import { compress, deCompress } from './zip.js';
+
 import readline from 'readline';
 
 const args = process.argv.slice(2);
@@ -57,10 +60,19 @@ const fileMan = async () => {
         await cp(args, currentFolder);
         break;
       case 'mv':
-        await mv(mv);
+        await mv(args, currentFolder);
         break;
       case 'rm':
-        await rm(rm);
+        await removeFile(args[0], currentFolder);
+        break;
+      case 'hash':
+        await hashCalc(args[0], currentFolder);
+        break;
+      case 'compress':
+        await compress(args, currentFolder)
+        break;
+      case 'decompress':
+        await deCompress(args, currentFolder)
         break;
       case '.exit':
         rl.close();
